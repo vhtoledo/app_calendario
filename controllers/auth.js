@@ -2,22 +2,30 @@
 const { response } = require('express');
 
 
-
 // Metodo crear Usuario
 const crearUsuario = (req, res = response) => {
 
-    res.json({
+   const { name, email, password } = req.body;
+
+    res.status(201).json({
        ok:true,
-       msg: 'Registro'
+       msg: 'Registro',
+       name,
+       email,
+       password
     });
 }
 
 // Metodo login usuario
  const loginUsuario = (req, res = response) => {
 
-    res.json({
+   const { email, password } = req.body;
+
+   res.status(201).json({
        ok:true,
-       msg: 'Login'
+       msg: 'Login',
+       email,
+       password
     });
 }
 
