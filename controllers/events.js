@@ -1,6 +1,7 @@
 const { response } = require('express');
 const Evento = require('../models/Evento');
 
+// Metodo obtener evento
 const getEventos = async( req, res = response ) => {
 
     const eventos = await Evento.find()
@@ -12,6 +13,7 @@ const getEventos = async( req, res = response ) => {
     });
 }
 
+// Metodo crear evento
 const crearEvento = async ( req, res = response ) => {
 
     const evento = new Evento( req.body );
@@ -37,6 +39,7 @@ const crearEvento = async ( req, res = response ) => {
     }
 }
 
+// Metodo actualizar evento
 const actualizarEvento = async( req, res = response ) => {
     
     const eventoId = req.params.id;
@@ -83,6 +86,7 @@ const actualizarEvento = async( req, res = response ) => {
 
 }
 
+// Metodo eliminar evento
 const eliminarEvento = async( req, res = response ) => {
 
     const eventoId = req.params.id;
