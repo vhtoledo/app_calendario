@@ -9,15 +9,38 @@ const { getEventos, crearEvento, actualizarEvento, eliminarEvento } = require('.
 
 const router = Router();
 
-// Todas tienen que psar por la validación del JWT
-// Obtener eventos
-Router.get('/', validarJWT, getEventos);
+// Todas tienes que pasar por la validación del JWT
+router.use( validarJWT );
+
+
+// Obtener eventos 
+router.get('/', getEventos );
 
 // Crear un nuevo evento
-Router.post('/', validarJWT, crearEvento);
+router.post(
+    '/',
+    [
+        check('title','El titulo es obligatorio').not().isEmpty(),
+        check('start','Fecha de inicio es obligatoria').custom( isDate ),
+        check('end','Fecha de finalización es obligatoria').custom( isDate ),
+        validarCampos
+    ],
+    crearEvento 
+);
 
 // Actualizar Evento
-Router.put('/:id', validarJWT, actualizarEvento);
+router.put(
+    '/:id', 
+    [
+        check('title','El titulo es obligatorio').not().isEmpty(),
+        check('start','Fecha de inicio es obligatoria').custom( isDate ),
+        check('end','Fecha de finalización es obligatoria').custom( isDate ),
+        validarCampos
+    ],
+    actualizarEvento 
+);
 
-// Borrar Evento
-Router.delete('/:id', validarJWT, eliminarEvento);
+// Borrar evento
+router.delete('/:id', eliminarEvento );
+
+module.exports = router;
