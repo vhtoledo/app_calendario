@@ -1,13 +1,21 @@
+/* 
+    Event Routes
+    /api/events
+*/
+const { Router } = require('express');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
-// Todas tienen que psar por la validación
+const router = Router();
+
+// Todas tienen que psar por la validación del JWT
 // Obtener eventos
-Router.get('/', getEventos);
+Router.get('/', validarJWT, getEventos);
 
 // Crear un nuevo evento
-Router.post('/', crearEvento);
+Router.post('/', validarJWT, crearEvento);
 
 // Actualizar Evento
-Router.put('/:id', actualizarEvento);
+Router.put('/:id', validarJWT, actualizarEvento);
 
 // Borrar Evento
-Router.delete('/:id', eliminarEvento);
+Router.delete('/:id', validarJWT, eliminarEvento);
